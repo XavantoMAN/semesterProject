@@ -4,7 +4,7 @@ import datetime
 import backend
 
 plt.rcParams['figure.figsize'] = [8.0, 4.0]
-plt.rcParams['figure.dpi'] = 140
+plt.rcParams['figure.dpi'] = 150
 
 
 def plot_key_rate_all_time():
@@ -23,23 +23,14 @@ def plot_key_rate_all_time():
     plt.show()
 
 
-def plot_key_rate_for_year(year: str):
-    key_rate = backend.get_key_rate_and_inflation()
-    key_rate = key_rate[::-1]
-    key_rate['Дата'] = key_rate['Дата'].astype('string')
-    key_rate = key_rate[key_rate.Дата.str.contains(f'^{year}-..-01')]
-    key_rate.plot(x='Дата', y=['Ключевая ставка, % годовых', 'Инфляция, % г/г'])
-    plt.show()
-
-
 def plot_key_rate_for_period(start_year: str, start_month: str, end_year: str, end_month: str):
     key_rate = backend.get_key_rate_and_inflation()
     key_rate = key_rate[::-1]
     key_rate['Дата'] = key_rate['Дата'].astype('string')
     index_start = key_rate[key_rate.Дата.str.contains(f'^{start_year}-{start_month}-01')].index
     index_end = key_rate[key_rate.Дата.str.contains(f'^{end_year}-{end_month}-01')].index
-    print(index_end, index_start)
     key_rate = key_rate.loc[index_start[0]:index_end[0]]
+    key_rate['Дата'] = key_rate['Дата'].astype('datetime64[ns]')
     key_rate.plot(x='Дата', y=['Ключевая ставка, % годовых', 'Инфляция, % г/г'])
     plt.show()
 
@@ -48,9 +39,17 @@ def pie_diagram_gdp_in_monetary_current():
     gdp_in_monetary = backend.get_gdp_in_monetary_current()
     gdp_in_monetary['Last'] = gdp_in_monetary['Last'].astype('float')
     gdp_in_monetary.plot(kind='pie', y='Last', autopct='%1.0f%%')
-    plt.title('ВВП в денежном представлении')
+    plt.title('Распределение ВВП по отраслям')
     plt.legend(gdp_in_monetary['Name'], loc='best', bbox_to_anchor=(0.15, 0.37))
     plt.show()
 
+
+def plot_gdp_all_time():
+    gdp_all_time = backend.get_gdp_all_time()
+    gdp_all_time['Amount'] = gdp_all_time['Amount'].astype('float')
+    gdp_all_time['Year'] = gdp_all_time['Year'].astype('string')
+    gdp_all_time.plot(x='Year', y=['Amount'])
+    plt.title('ВВП(в текущих ценах, млрд. рублей)')
+    plt.show()
 
 #pie_diagram_gdp_in_monetary_current()

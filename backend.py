@@ -2,7 +2,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
-import csv
+import openpyxl
 
 
 def get_today_currencies():
@@ -20,12 +20,48 @@ def get_gdp_in_monetary_current():
 
 
 def get_key_rate_and_inflation():
-    temp = csv.reader('key_rate_and_inflation.csv')
-    for line in temp:
-        pass
-        #print(line)
     key_rate = pd.read_csv('key_rate_and_inflation.csv')
     return key_rate
+
+
+def get_gdp_all_time():
+    workbook = openpyxl.load_workbook('gdp_all_time.xlsx')
+    sheetnames = workbook.sheetnames
+    worksheet = workbook[sheetnames[1]]
+    lst1 = []
+    lst2 = []
+    for i in range(1, 18):
+        for j in range(3, 5):
+            if j == 3:
+                lst1.append(worksheet.cell(row=j, column=i).value)
+            else:
+                lst2.append(worksheet.cell(row=j, column=i).value)
+    worksheet = workbook[sheetnames[2]]
+    for i in range(1, 14):
+        for j in range(4, 6):
+            if j == 4:
+                data = worksheet.cell(row=j, column=i).value
+                if i > 11:
+                    data = data[:-2]
+                lst1.append(data)
+            else:
+                lst2.append(worksheet.cell(row=j, column=i).value)
+    gdp_all_time = pd.DataFrame({'Year': lst1,
+                                 'Amount': lst2})
+    return gdp_all_time
+
+
+def parse_gdp_all_time():
+    url = 'https://rosstat.gov.ru/storage/mediabank/VVP_god_s_1995-2023.xlsx'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
+    }
+    response = requests.get(url, headers=headers)
+    print(response)
+    while response.status_code != 200:
+        response = requests.get(url)
+    with open('gdp_all_time.xlsx', 'wb') as f:
+        f.write(response.content)
 
 
 def parse_today_currencies():
@@ -169,3 +205,5 @@ def update_data():
 
 
 #update_data()
+# parse_gdp_all_time()
+# get_gdp_all_time()

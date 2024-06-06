@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
+    <width>871</width>
     <height>627</height>
    </rect>
   </property>
@@ -14,41 +14,56 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>0</width>
-      <height>0</height>
+      <width>900</width>
+      <height>600</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>0</width>
-      <height>0</height>
+      <width>600</width>
+      <height>400</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>0</width>
-      <height>0</height>
+      <width>2560</width>
+      <height>1440</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>30</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>900</width>
+      <height>600</height>
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="main_menu">
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>150</y>
-        <width>164</width>
-        <height>83</height>
+        <x>200</x>
+        <y>140</y>
+        <width>491</width>
+        <height>291</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayoutMain">
        <item>
         <widget class="QPushButton" name="button_currencies">
          <property name="sizePolicy">
@@ -56,6 +71,11 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>Валюты</string>
@@ -70,6 +90,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Ключевая ставка и инфляция</string>
          </property>
@@ -83,6 +108,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Внутренний Валовый Продукт</string>
          </property>
@@ -91,9 +121,394 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_currencies"/>
-    <widget class="QWidget" name="page_key_rate"/>
-    <widget class="QWidget" name="page_gdp"/>
+    <widget class="QWidget" name="page_currencies">
+     <widget class="QPushButton" name="button_back_currencies">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>520</y>
+        <width>150</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>851</width>
+        <height>66</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayoutCurrencies">
+       <item>
+        <widget class="QComboBox" name="combo_year_currencies1"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_currencies1"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label1_currencies">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>40</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_year_currencies2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_currencies2"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_ok_currencies">
+         <property name="text">
+          <string>Установить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_currency">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>270</y>
+        <width>300</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать график 
+изменения курса выбранной валюты 
+за выбранный период</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_show_diagram_currencies">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>270</y>
+        <width>300</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать 
+сравнительную диаграмму 
+стоимости валют</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="combo_currency">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>90</y>
+        <width>170</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QListView" name="list_view_currencies">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>70</y>
+        <width>200</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>80</y>
+        <width>70</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CheckBox</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_key_rate">
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>851</width>
+        <height>66</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayoutKeyRate">
+       <item>
+        <widget class="QComboBox" name="combo_year_key_rate1"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_key_rate1"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label1_key_rate">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>40</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_year_key_rate2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_key_rate2"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_ok_key_rate">
+         <property name="text">
+          <string>Установить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="button_back_key_rate">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>520</y>
+        <width>150</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_all_time_key_rate">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>300</y>
+        <width>230</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать график 
+за все время</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_for_period_key_rate">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>300</y>
+        <width>230</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать график 
+за выбранный период</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_gdp">
+     <widget class="QPushButton" name="button_back_gdp">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>520</y>
+        <width>150</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>851</width>
+        <height>66</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayoutGDP">
+       <item>
+        <widget class="QComboBox" name="combo_year_gdp1"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_gdp1"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label1_gdp">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>40</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>-</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_year_gdp2"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="combo_month_gdp2"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_ok_gdp">
+         <property name="text">
+          <string>Установить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_pie_gdp">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>310</y>
+        <width>300</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать 
+круговую диаграмму 
+распределения ВВП по отраслям 
+за последний год</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_gdp">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>310</y>
+        <width>300</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать 
+график ВВП 
+за выбранный период</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_show_plot_gdp_growth">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>420</y>
+        <width>300</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Показать 
+график темпов роста ВВП
+за выбранный период</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -101,7 +516,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>894</width>
+     <width>871</width>
      <height>21</height>
     </rect>
    </property>
