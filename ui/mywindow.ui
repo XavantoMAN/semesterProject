@@ -51,7 +51,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="main_menu">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -151,10 +151,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayoutCurrencies">
        <item>
-        <widget class="QComboBox" name="combo_year_currencies1"/>
-       </item>
-       <item>
-        <widget class="QComboBox" name="combo_month_currencies1"/>
+        <widget class="QDateEdit" name="date_edit_currencies1"/>
        </item>
        <item>
         <widget class="QLabel" name="label1_currencies">
@@ -178,17 +175,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="combo_year_currencies2"/>
-       </item>
-       <item>
-        <widget class="QComboBox" name="combo_month_currencies2"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_ok_currencies">
-         <property name="text">
-          <string>Установить</string>
-         </property>
-        </widget>
+        <widget class="QDateEdit" name="date_edit_currencies2"/>
        </item>
       </layout>
      </widget>
@@ -310,13 +297,6 @@
        <item>
         <widget class="QComboBox" name="combo_month_key_rate2"/>
        </item>
-       <item>
-        <widget class="QPushButton" name="button_ok_key_rate">
-         <property name="text">
-          <string>Установить</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QPushButton" name="button_back_key_rate">
@@ -409,9 +389,6 @@
         <widget class="QComboBox" name="combo_year_gdp1"/>
        </item>
        <item>
-        <widget class="QComboBox" name="combo_month_gdp1"/>
-       </item>
-       <item>
         <widget class="QLabel" name="label1_gdp">
          <property name="maximumSize">
           <size>
@@ -435,23 +412,13 @@
        <item>
         <widget class="QComboBox" name="combo_year_gdp2"/>
        </item>
-       <item>
-        <widget class="QComboBox" name="combo_month_gdp2"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_ok_gdp">
-         <property name="text">
-          <string>Установить</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QPushButton" name="button_show_plot_pie_gdp">
       <property name="geometry">
        <rect>
         <x>100</x>
-        <y>310</y>
+        <y>200</y>
         <width>300</width>
         <height>80</height>
        </rect>
@@ -472,7 +439,7 @@
       <property name="geometry">
        <rect>
         <x>500</x>
-        <y>310</y>
+        <y>200</y>
         <width>300</width>
         <height>80</height>
        </rect>
@@ -492,7 +459,7 @@
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>420</y>
+        <y>320</y>
         <width>300</width>
         <height>80</height>
        </rect>

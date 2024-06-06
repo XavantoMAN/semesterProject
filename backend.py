@@ -10,10 +10,6 @@ def get_today_currencies():
     return today_currencies
 
 
-def get_currency_for_period():
-    url = 'https://ru.tradingeconomics.com/russia/gdp'
-
-
 def get_gdp_in_monetary_current():
     gdp_in_monetary = pd.read_csv('gdp_in_monetary_current.csv')
     return gdp_in_monetary
@@ -51,6 +47,25 @@ def get_gdp_all_time():
     return gdp_all_time
 
 
+def get_gdp_growth():
+    gdp_all_time = get_gdp_all_time()
+    lst1 = []
+    iterator = 0
+    prev = 1
+    for i in gdp_all_time.Amount:
+        if iterator == 0:
+            lst1.append(0)
+        else:
+            curr = i
+            value = round(((curr / prev) - 1) * 100, 2)
+            lst1.append(value)
+        prev = i
+        iterator += 1
+    gdp_growth_all_time = pd.DataFrame({'Year': gdp_all_time.Year,
+                                        'Percent': lst1})
+    return gdp_growth_all_time
+
+
 def parse_gdp_all_time():
     url = 'https://rosstat.gov.ru/storage/mediabank/VVP_god_s_1995-2023.xlsx'
     headers = {
@@ -59,7 +74,7 @@ def parse_gdp_all_time():
     response = requests.get(url, headers=headers)
     print(response)
     while response.status_code != 200:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
     with open('gdp_all_time.xlsx', 'wb') as f:
         f.write(response.content)
 
@@ -71,7 +86,7 @@ def parse_today_currencies():
     }
     response = requests.get(url, headers=headers)
     while response.status_code != 200:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
     print(response)
     parsed_html = bs(response.text, 'html.parser')
     table = parsed_html.find('table', 'data')
@@ -91,12 +106,15 @@ def parse_today_currencies():
         table_data.append(i.text)
     for i in range(len(table_data)):
         if iterator == 5:
-            currency_rate.append(table_data[i])
+            temp = float(table_data[i].replace(',', '.'))
+            if count[-1] != 1:
+                temp = temp/count[-1]
+            currency_rate.append(temp)
             iterator = 0
         elif iterator == 4:
             currency.append(table_data[i])
         elif iterator == 3:
-            count.append(table_data[i])
+            count.append(int(table_data[i]))
         elif iterator == 2:
             letter_code.append(table_data[i])
         elif iterator == 1:
@@ -119,7 +137,7 @@ def parse_key_rate_and_inflation():
     response = requests.get(url, headers=headers)
     print(response)
     while response.status_code != 200:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
     parsed_html = bs(response.text, 'html.parser')
     table = parsed_html.find('table', 'data')
     table_head_temp = table.find_all('th')
@@ -165,7 +183,7 @@ def parse_gdp_in_monetary_current():
     response = requests.get(url, headers=headers)
     print(response)
     while response.status_code != 200:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
     parsed_html = bs(response.text, 'html.parser')
     table = parsed_html.find('table', 'table table-hover')
     table_data_temp = table.find_all('td')
@@ -204,6 +222,58 @@ def update_data():
     parse_gdp_in_monetary_current()
 
 
-#update_data()
-# parse_gdp_all_time()
-# get_gdp_all_time()
+def parse_currencies_and_codes():
+    url = 'https://cbr.ru/currency_base/dynamics/'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
+    response = requests.get(url, headers=headers)
+    print(response)
+    while response.status_code != 200:
+        response = requests.get(url, headers=headers)
+    parsed_html = bs(response.text, 'html.parser')
+    table = parsed_html.find('label', 'input_label')
+    data = table.select('option[value]')
+    with open('currency_names.csv', 'w') as f:
+        for i in data:
+            f.write(','+i.getText().strip())
+    with open('currency_codes.csv', 'w') as f:
+        for i in data:
+            f.write(','+i.get('value'))
+
+
+def parse_currency_for_period(currency_code: str, from_date: str, to_date: str):
+    url = ('https://cbr.ru/currency_base/dynamics/?UniDbQuery.Posted=True&UniDbQuery.so=1&UniDbQuery.'
+           f'mode=1&UniDbQuery.date_req1=&UniDbQuery.date_req2=&UniDbQuery.VAL_NM_RQ={currency_code}&UniDbQuery.'
+           f'From={from_date}&UniDbQuery.To={to_date}')
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
+    response = requests.get(url, headers=headers)
+    print(response)
+    while response.status_code != 200:
+        response = requests.get(url, headers=headers)
+    parsed_html = bs(response.text, 'html.parser')
+    table = parsed_html.find('table', 'data')
+    table_data = table.find_all('td')
+    lst1 = []
+    lst2 = []
+    lst3 = []
+    iterator = 1
+    for i in range(1, len(table_data)):
+        if table_data[i].text.__contains__('\n'):
+            continue
+        if iterator == 1:
+            lst1.append(table_data[i].text)
+        elif iterator == 2:
+            lst2.append(table_data[i].text)
+        elif iterator == 3:
+            iterator = 0
+            temp = table_data[i].text.replace(',', '.')
+            temp = temp.replace(' ', '')
+            temp = round(float(temp), 2)
+            lst3.append(temp/int(lst2[-1]))
+        iterator += 1
+    currency_for_period = pd.DataFrame({'Дата': lst1,
+                                        'Единиц': lst2,
+                                        'Курс': lst3})
+    currency_for_period = currency_for_period[::-1]
+    return currency_for_period

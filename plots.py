@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import datetime
+import pandas as pd
 import backend
 
 plt.rcParams['figure.figsize'] = [8.0, 4.0]
@@ -44,12 +43,44 @@ def pie_diagram_gdp_in_monetary_current():
     plt.show()
 
 
-def plot_gdp_all_time():
-    gdp_all_time = backend.get_gdp_all_time()
-    gdp_all_time['Amount'] = gdp_all_time['Amount'].astype('float')
-    gdp_all_time['Year'] = gdp_all_time['Year'].astype('string')
-    gdp_all_time.plot(x='Year', y=['Amount'])
+def plot_gdp_for_period(start_year: str, end_year: str):
+    gdp_for_period = backend.get_gdp_all_time()
+    gdp_for_period['Amount'] = gdp_for_period['Amount'].astype('float')
+    gdp_for_period['Year'] = gdp_for_period['Year'].astype('string')
+    index_start = gdp_for_period[gdp_for_period.Year == start_year].index
+    index_end = gdp_for_period[gdp_for_period.Year == end_year].index
+    gdp_for_period = gdp_for_period.loc[index_start[0]:index_end[0]]
+    gdp_for_period.plot(x='Year', y='Amount')
     plt.title('ВВП(в текущих ценах, млрд. рублей)')
     plt.show()
 
-#pie_diagram_gdp_in_monetary_current()
+
+def plot_gdp_growth_for_period(start_year: str, end_year: str):
+    gdp_growth_for_period = backend.get_gdp_growth()
+    gdp_growth_for_period['Year'] = gdp_growth_for_period['Year'].astype('string')
+    index_start = gdp_growth_for_period[gdp_growth_for_period.Year == start_year].index
+    index_end = gdp_growth_for_period[gdp_growth_for_period.Year == end_year].index
+    gdp_for_period = gdp_growth_for_period.loc[index_start[0]:index_end[0]]
+    gdp_for_period.plot(x='Year', y='Percent')
+    plt.title('Годовой рост ВВП(в процентах)')
+    plt.show()
+
+
+def plot_currency_for_period(currency_code: str, from_date: str, to_date: str):
+    currency_for_period = backend.parse_currency_for_period(currency_code, from_date, to_date)
+    currency_for_period.plot(x='Дата', y='Курс')
+    plt.title('Динамика курса валюты за выбранный период')
+    plt.ylabel('Рубли')
+    plt.show()
+
+
+def diagram_selected_currencies(selected: list):
+    currencies = backend.get_today_currencies()
+    selected = pd.Series(selected)
+    currencies = currencies[currencies['Валюта'].isin(selected)]
+    currencies['Курс'] = currencies['Курс'].astype('float')
+    currencies.plot(kind='barh', x='Букв. код', y='Курс')
+    plt.title('Стоимость одной единицы валюты')
+    plt.xlabel('Рубли')
+    plt.ylabel('Букв. код страны')
+    plt.show()

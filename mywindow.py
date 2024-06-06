@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 # Form implementation generated from reading ui file 'ui/mywindow.ui'
 #
@@ -14,7 +15,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(871, 627)
+        MainWindow.resize(900, 630)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setEnabled(True)
         self.centralwidget.setObjectName("centralwidget")
@@ -25,18 +26,14 @@ class Ui_MainWindow(object):
         self.stackedWidget.setSizeIncrement(QtCore.QSize(30, 20))
         self.stackedWidget.setBaseSize(QtCore.QSize(900, 600))
         self.stackedWidget.setObjectName("stackedWidget")
-
         self.main_menu = QtWidgets.QWidget()
         self.main_menu.setObjectName("main_menu")
-
         self.verticalLayoutWidget = QtWidgets.QWidget(self.main_menu)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(200, 140, 491, 291))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-
         self.verticalLayoutMain = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayoutMain.setContentsMargins(0, 0, 0, 0)
         self.verticalLayoutMain.setObjectName("verticalLayoutMain")
-
         self.button_currencies = QtWidgets.QPushButton(self.verticalLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -48,7 +45,6 @@ class Ui_MainWindow(object):
         self.button_currencies.setFont(font)
         self.button_currencies.setObjectName("button_currencies")
         self.verticalLayoutMain.addWidget(self.button_currencies)
-
         self.button_key_rate_and_inflation = QtWidgets.QPushButton(self.verticalLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -60,7 +56,6 @@ class Ui_MainWindow(object):
         self.button_key_rate_and_inflation.setFont(font)
         self.button_key_rate_and_inflation.setObjectName("button_key_rate_and_inflation")
         self.verticalLayoutMain.addWidget(self.button_key_rate_and_inflation)
-
         self.button_gdp = QtWidgets.QPushButton(self.verticalLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -72,35 +67,29 @@ class Ui_MainWindow(object):
         self.button_gdp.setFont(font)
         self.button_gdp.setObjectName("button_gdp")
         self.verticalLayoutMain.addWidget(self.button_gdp)
-
         self.stackedWidget.addWidget(self.main_menu)
-
         self.page_currencies = QtWidgets.QWidget()
         self.page_currencies.setObjectName("page_currencies")
-
         self.button_back_currencies = QtWidgets.QPushButton(self.page_currencies)
         self.button_back_currencies.setGeometry(QtCore.QRect(20, 520, 150, 50))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.button_back_currencies.setFont(font)
         self.button_back_currencies.setObjectName("button_back_currencies")
-
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.page_currencies)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 0, 851, 66))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
-
         self.horizontalLayoutCurrencies = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayoutCurrencies.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayoutCurrencies.setObjectName("horizontalLayoutCurrencies")
-
-        self.combo_year_currencies1 = QtWidgets.QComboBox(self.horizontalLayoutWidget_2)
-        self.combo_year_currencies1.setObjectName("combo_year_currencies1")
-        self.horizontalLayoutCurrencies.addWidget(self.combo_year_currencies1)
-
-        self.combo_month_currencies1 = QtWidgets.QComboBox(self.horizontalLayoutWidget_2)
-        self.combo_month_currencies1.setObjectName("combo_month_currencies1")
-        self.horizontalLayoutCurrencies.addWidget(self.combo_month_currencies1)
-
+        self.date_edit_currencies1 = QtWidgets.QDateEdit(self.horizontalLayoutWidget_2)
+        self.date_edit_currencies1.setObjectName("date_edit_currencies1")
+        self.date_edit_currencies1.setDate(QtCore.QDate(1992, 12, 1))
+        self.date_edit_currencies1.setDisplayFormat("dd.MM.yyyy")
+        today = datetime.date.today()
+        self.date_edit_currencies1.setDateRange(QtCore.QDate(1992, 12, 1),
+                                                QtCore.QDate(int(today.year), int(today.month), int(today.day)))
+        self.horizontalLayoutCurrencies.addWidget(self.date_edit_currencies1)
         self.label1_currencies = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         self.label1_currencies.setMaximumSize(QtCore.QSize(20, 20))
         font = QtGui.QFont()
@@ -109,61 +98,48 @@ class Ui_MainWindow(object):
         self.label1_currencies.setAlignment(QtCore.Qt.AlignCenter)
         self.label1_currencies.setObjectName("label1_currencies")
         self.horizontalLayoutCurrencies.addWidget(self.label1_currencies)
-
-        self.combo_year_currencies2 = QtWidgets.QComboBox(self.horizontalLayoutWidget_2)
-        self.combo_year_currencies2.setObjectName("combo_year_currencies2")
-        self.horizontalLayoutCurrencies.addWidget(self.combo_year_currencies2)
-
-        self.combo_month_currencies2 = QtWidgets.QComboBox(self.horizontalLayoutWidget_2)
-        self.combo_month_currencies2.setObjectName("combo_month_currencies2")
-        self.horizontalLayoutCurrencies.addWidget(self.combo_month_currencies2)
-
+        self.date_edit_currencies2 = QtWidgets.QDateEdit(self.horizontalLayoutWidget_2)
+        self.date_edit_currencies2.setObjectName("date_edit_currencies2")
+        today = datetime.date.today()
+        self.date_edit_currencies2.setDate(QtCore.QDate(int(today.year), int(today.month), int(today.day)))
+        self.date_edit_currencies2.setDisplayFormat("dd.MM.yyyy")
+        today = datetime.date.today()
+        self.date_edit_currencies2.setDateRange(QtCore.QDate(1992, 12, 1),
+                                                QtCore.QDate(int(today.year), int(today.month), int(today.day)))
+        self.horizontalLayoutCurrencies.addWidget(self.date_edit_currencies2)
         self.button_show_plot_currency = QtWidgets.QPushButton(self.page_currencies)
         self.button_show_plot_currency.setGeometry(QtCore.QRect(90, 270, 300, 70))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.button_show_plot_currency.setFont(font)
         self.button_show_plot_currency.setObjectName("button_show_plot_currency")
-
         self.button_show_diagram_currencies = QtWidgets.QPushButton(self.page_currencies)
         self.button_show_diagram_currencies.setGeometry(QtCore.QRect(480, 270, 300, 70))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.button_show_diagram_currencies.setFont(font)
         self.button_show_diagram_currencies.setObjectName("button_show_diagram_currencies")
-
         self.combo_currency = QtWidgets.QComboBox(self.page_currencies)
         self.combo_currency.setGeometry(QtCore.QRect(160, 90, 170, 24))
         self.combo_currency.setObjectName("combo_currency")
-
         self.list_view_currencies = QtWidgets.QListView(self.page_currencies)
-        self.list_view_currencies.setGeometry(QtCore.QRect(510, 70, 200, 192))
+        self.list_view_currencies.setGeometry(QtCore.QRect(480, 70, 300, 192))
         self.list_view_currencies.setObjectName("list_view_currencies")
-
-        self.checkBox = QtWidgets.QCheckBox(self.page_currencies)
-        self.checkBox.setGeometry(QtCore.QRect(520, 80, 70, 17))
-        self.checkBox.setObjectName("checkBox")
         self.stackedWidget.addWidget(self.page_currencies)
-
         self.page_key_rate = QtWidgets.QWidget()
         self.page_key_rate.setObjectName("page_key_rate")
-
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.page_key_rate)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 0, 851, 66))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-
         self.horizontalLayoutKeyRate = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayoutKeyRate.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayoutKeyRate.setObjectName("horizontalLayoutKeyRate")
-
         self.combo_year_key_rate1 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.combo_year_key_rate1.setObjectName("combo_year_key_rate1")
         self.horizontalLayoutKeyRate.addWidget(self.combo_year_key_rate1)
-
         self.combo_month_key_rate1 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.combo_month_key_rate1.setObjectName("combo_month_key_rate1")
         self.horizontalLayoutKeyRate.addWidget(self.combo_month_key_rate1)
-
         self.label1_key_rate = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.label1_key_rate.setMaximumSize(QtCore.QSize(20, 20))
         font = QtGui.QFont()
@@ -172,64 +148,48 @@ class Ui_MainWindow(object):
         self.label1_key_rate.setAlignment(QtCore.Qt.AlignCenter)
         self.label1_key_rate.setObjectName("label1_key_rate")
         self.horizontalLayoutKeyRate.addWidget(self.label1_key_rate)
-
         self.combo_year_key_rate2 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.combo_year_key_rate2.setObjectName("combo_year_key_rate2")
         self.horizontalLayoutKeyRate.addWidget(self.combo_year_key_rate2)
-
         self.combo_month_key_rate2 = QtWidgets.QComboBox(self.horizontalLayoutWidget)
         self.combo_month_key_rate2.setObjectName("combo_month_key_rate2")
         self.horizontalLayoutKeyRate.addWidget(self.combo_month_key_rate2)
-
         self.button_back_key_rate = QtWidgets.QPushButton(self.page_key_rate)
         self.button_back_key_rate.setGeometry(QtCore.QRect(20, 520, 150, 50))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.button_back_key_rate.setFont(font)
         self.button_back_key_rate.setObjectName("button_back_key_rate")
-
         self.button_show_plot_all_time_key_rate = QtWidgets.QPushButton(self.page_key_rate)
         self.button_show_plot_all_time_key_rate.setGeometry(QtCore.QRect(190, 300, 230, 70))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.button_show_plot_all_time_key_rate.setFont(font)
         self.button_show_plot_all_time_key_rate.setObjectName("button_show_plot_all_time_key_rate")
-
         self.button_show_plot_for_period_key_rate = QtWidgets.QPushButton(self.page_key_rate)
         self.button_show_plot_for_period_key_rate.setGeometry(QtCore.QRect(460, 300, 230, 70))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.button_show_plot_for_period_key_rate.setFont(font)
         self.button_show_plot_for_period_key_rate.setObjectName("button_show_plot_for_period_key_rate")
-
         self.stackedWidget.addWidget(self.page_key_rate)
-
         self.page_gdp = QtWidgets.QWidget()
         self.page_gdp.setObjectName("page_gdp")
-
         self.button_back_gdp = QtWidgets.QPushButton(self.page_gdp)
         self.button_back_gdp.setGeometry(QtCore.QRect(20, 520, 150, 50))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.button_back_gdp.setFont(font)
         self.button_back_gdp.setObjectName("button_back_gdp")
-
         self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.page_gdp)
         self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(10, 0, 851, 66))
         self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
-
         self.horizontalLayoutGDP = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
         self.horizontalLayoutGDP.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayoutGDP.setObjectName("horizontalLayoutGDP")
-
         self.combo_year_gdp1 = QtWidgets.QComboBox(self.horizontalLayoutWidget_3)
         self.combo_year_gdp1.setObjectName("combo_year_gdp1")
         self.horizontalLayoutGDP.addWidget(self.combo_year_gdp1)
-
-        self.combo_month_gdp1 = QtWidgets.QComboBox(self.horizontalLayoutWidget_3)
-        self.combo_month_gdp1.setObjectName("combo_month_gdp1")
-        self.horizontalLayoutGDP.addWidget(self.combo_month_gdp1)
-
         self.label1_gdp = QtWidgets.QLabel(self.horizontalLayoutWidget_3)
         self.label1_gdp.setMaximumSize(QtCore.QSize(20, 20))
         font = QtGui.QFont()
@@ -238,52 +198,38 @@ class Ui_MainWindow(object):
         self.label1_gdp.setAlignment(QtCore.Qt.AlignCenter)
         self.label1_gdp.setObjectName("label1_gdp")
         self.horizontalLayoutGDP.addWidget(self.label1_gdp)
-
         self.combo_year_gdp2 = QtWidgets.QComboBox(self.horizontalLayoutWidget_3)
         self.combo_year_gdp2.setObjectName("combo_year_gdp2")
         self.horizontalLayoutGDP.addWidget(self.combo_year_gdp2)
-
-        self.combo_month_gdp2 = QtWidgets.QComboBox(self.horizontalLayoutWidget_3)
-        self.combo_month_gdp2.setObjectName("combo_month_gdp2")
-        self.horizontalLayoutGDP.addWidget(self.combo_month_gdp2)
-
         self.button_show_plot_pie_gdp = QtWidgets.QPushButton(self.page_gdp)
-        self.button_show_plot_pie_gdp.setGeometry(QtCore.QRect(100, 310, 300, 80))
+        self.button_show_plot_pie_gdp.setGeometry(QtCore.QRect(100, 200, 300, 80))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.button_show_plot_pie_gdp.setFont(font)
-        self.button_show_plot_pie_gdp.setObjectName("pushButton")
-
+        self.button_show_plot_pie_gdp.setObjectName("button_show_plot_pie_gdp")
         self.button_show_plot_gdp = QtWidgets.QPushButton(self.page_gdp)
-        self.button_show_plot_gdp.setGeometry(QtCore.QRect(500, 310, 300, 80))
+        self.button_show_plot_gdp.setGeometry(QtCore.QRect(500, 200, 300, 80))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.button_show_plot_gdp.setFont(font)
-        self.button_show_plot_gdp.setObjectName("pushButton_2")
-
+        self.button_show_plot_gdp.setObjectName("button_show_plot_gdp")
         self.button_show_plot_gdp_growth = QtWidgets.QPushButton(self.page_gdp)
-        self.button_show_plot_gdp_growth.setGeometry(QtCore.QRect(300, 420, 300, 80))
+        self.button_show_plot_gdp_growth.setGeometry(QtCore.QRect(300, 320, 300, 80))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.button_show_plot_gdp_growth.setFont(font)
-        self.button_show_plot_gdp_growth.setObjectName("pushButton_3")
-
+        self.button_show_plot_gdp_growth.setObjectName("button_show_plot_gdp_growth")
         self.stackedWidget.addWidget(self.page_gdp)
-
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 871, 21))
         self.menubar.setObjectName("menubar")
-
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("menu")
         MainWindow.setMenuBar(self.menubar)
-
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.action = QtWidgets.QAction(MainWindow)
         self.action.setObjectName("action")
         self.menu.addAction(self.action)
@@ -302,29 +248,28 @@ class Ui_MainWindow(object):
         self.button_back_currencies.setText(_translate("MainWindow", "Назад"))
         self.label1_currencies.setText(_translate("MainWindow", "-"))
         self.button_show_plot_currency.setText(_translate("MainWindow", "Показать график \n"
-                                                "изменения курса выбранной валюты \n"
-                                                "за выбранный период"))
+"изменения курса выбранной валюты \n"
+"за выбранный период"))
         self.button_show_diagram_currencies.setText(_translate("MainWindow", "Показать \n"
-                                                    "сравнительную диаграмму \n"
-                                                    "стоимости валют"))
-        self.checkBox.setText(_translate("MainWindow", "CheckBox"))
+"сравнительную диаграмму \n"
+"стоимости валют"))
         self.label1_key_rate.setText(_translate("MainWindow", "-"))
         self.button_back_key_rate.setText(_translate("MainWindow", "Назад"))
         self.button_show_plot_all_time_key_rate.setText(_translate("MainWindow", "Показать график \n"
-                                                        "за все время"))
+"за все время"))
         self.button_show_plot_for_period_key_rate.setText(_translate("MainWindow", "Показать график \n"
-                                                        "за выбранный период"))
+"за выбранный период"))
         self.button_back_gdp.setText(_translate("MainWindow", "Назад"))
         self.label1_gdp.setText(_translate("MainWindow", "-"))
         self.button_show_plot_pie_gdp.setText(_translate("MainWindow", "Показать \n"
-                                "круговую диаграмму \n"
-                                "распределения ВВП по отраслям \n"
-                                "за последний год"))
+"круговую диаграмму \n"
+"распределения ВВП по отраслям \n"
+"за последний год"))
         self.button_show_plot_gdp.setText(_translate("MainWindow", "Показать \n"
-                                    "график ВВП \n"
-                                    "за выбранный период"))
+"график ВВП \n"
+"за выбранный период"))
         self.button_show_plot_gdp_growth.setText(_translate("MainWindow", "Показать \n"
-                                    "график темпов роста ВВП\n"
-                                    "за выбранный период"))
+"график темпов роста ВВП\n"
+"за выбранный период"))
         self.menu.setTitle(_translate("MainWindow", "Меню"))
         self.action.setText(_translate("MainWindow", "Обновить базу данных"))
